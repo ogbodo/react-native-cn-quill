@@ -10,7 +10,6 @@
   "files": [
     "lib",
     "src",
-    "!lib/example",
     "!**/__tests__",
     "!**/__fixtures__",
     "!**/__mocks__"
@@ -20,7 +19,6 @@
     "typescript": "tsc --noEmit",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
     "release": "release-it",
-    "example": "yarn --cwd example",
     "bootstrap": "yarn example && yarn",
     "prepublish": "tsc",
     "prepare": "bob build"
