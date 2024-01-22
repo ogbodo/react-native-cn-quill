@@ -398,7 +398,7 @@ export default class QuillEditor extends React.Component<
       style={style}
       onError={(syntheticEvent) => {
         const { nativeEvent } = syntheticEvent;
-        console.warn('WebView error: ', nativeEvent);
+        if (__DEV__) console.warn('WebView error: ', nativeEvent);
       }}
       allowFileAccess={true}
       domStorageEnabled={false}

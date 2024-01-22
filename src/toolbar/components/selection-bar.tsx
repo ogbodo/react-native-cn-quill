@@ -16,7 +16,7 @@ import { formatType } from '../../constants/formats';
 interface Props {}
 
 export const SelectionBar: React.FC<Props> = ({}) => {
-  const { theme, options, hide, selectionName, styles } = useToolbar();
+  const { theme, open, options, hide, selectionName, styles } = useToolbar();
   const defaultStyles = useStyles(theme);
   const rootStyle = styles?.selection?.root
     ? styles.selection.root(defaultStyles.selection)
@@ -76,11 +76,13 @@ export const SelectionBar: React.FC<Props> = ({}) => {
               );
           })}
       </ScrollView>
-      <TouchableOpacity onPress={() => hide()}>
-        <View style={closeViewStyle}>
-          <Text style={closeTextStyle}>×</Text>
-        </View>
-      </TouchableOpacity>
+      {open ? (
+        <TouchableOpacity onPress={() => hide()}>
+          <View style={closeViewStyle}>
+            <Text style={closeTextStyle}>×</Text>
+          </View>
+        </TouchableOpacity>
+      ) : null}
     </View>
   );
 };

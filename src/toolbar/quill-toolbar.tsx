@@ -162,7 +162,7 @@ export class QuillToolbar extends Component<QuillToolbarProps, ToolbarState> {
                 object.length > 0 && (
                   <React.Fragment key={index}>
                     <ToolSet tools={object} />
-                    {toolSets.length > index && (
+                    {toolSets.length - 1 > index && (
                       <ToolbarSeparator color={theme.color} />
                     )}
                   </React.Fragment>

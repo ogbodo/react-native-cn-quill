@@ -40,7 +40,7 @@ export const getToolbarData = (
         let optFiltered = opt;
         if (hasExclusion) {
           optFiltered = opt.filter(
-            (it) => typeof it === 'string' && !excludedOptionsObj[it]
+            (it) => !(typeof it === 'string' && excludedOptionsObj[it])
           );
         }
         const set = createToolSet(optFiltered, icons, defaultFontFamily);
