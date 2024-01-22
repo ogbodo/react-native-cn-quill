@@ -1,4 +1,5 @@
 const fullOptions = [
+  ['image', 'video'],
   ['bold', 'italic', 'underline', 'strike'], // toggled buttons
   ['blockquote', 'code-block'],
   [{ size: ['small', false, 'large', 'huge'] }], // custom dropdown
@@ -14,8 +15,6 @@ const fullOptions = [
   [{ color: [] }, { background: [] }], // dropdown with defaults from theme
   [{ font: [] }],
   [{ align: [] }],
-  ['image', 'video'],
-  // ["clean"], // remove formatting button
 ];
 
 const basicOptions = [

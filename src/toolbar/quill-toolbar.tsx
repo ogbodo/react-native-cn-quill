@@ -29,6 +29,7 @@ const WIDTH = Dimensions.get('window').width;
 
 interface QuillToolbarProps {
   options: Array<Array<string | object> | string | object> | 'full' | 'basic';
+  excludedOptions?: Array<string>;
   styles?: CustomStyles;
   editor: React.RefObject<QuillEditor>;
   theme: ToolbarTheme | 'dark' | 'light';
@@ -92,7 +93,7 @@ export class QuillToolbar extends Component<QuillToolbarProps, ToolbarState> {
   private prepareIconset = () => {
     const { options, custom } = this.props;
     let toolbarOptions: Array<Array<string | object> | string | object> = [];
-    if (options === 'full' || options === []) {
+    if (options === 'full' || options.length === 0) {
       toolbarOptions = fullOptions;
     } else if (options === 'basic') {
       toolbarOptions = basicOptions;
@@ -102,7 +103,8 @@ export class QuillToolbar extends Component<QuillToolbarProps, ToolbarState> {
     const toolSets = getToolbarData(
       toolbarOptions,
       custom?.icons,
-      this.state.defaultFontFamily
+      this.state.defaultFontFamily,
+      this.props.excludedOptions
     );
     this.setState({ toolSets });
   };

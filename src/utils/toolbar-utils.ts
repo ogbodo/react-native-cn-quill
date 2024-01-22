@@ -11,25 +11,44 @@ import { getFontName } from './editor-utils';
 export const getToolbarData = (
   options: Array<Array<string | object> | string | object>,
   customIcons?: Record<string, any>,
-  defaultFontFamily?: string
+  defaultFontFamily?: string,
+  excludedOptions: Array<string> = []
 ): Array<Array<ToggleData | TextListData | ColorListData>> => {
   let iconSet: Array<Array<ToggleData | TextListData | ColorListData>> = [];
   const icons = customIcons
     ? { ...defaultIcons, ...customIcons }
     : defaultIcons;
-
-  const isSingle: boolean = !(options.length > 0 && Array.isArray(options[0]));
+  const hasExclusion = excludedOptions.length > 0;
+  const isSingle = !(options.length > 0 && Array.isArray(options[0]));
   if (isSingle) {
     const set = createToolSet(options, icons);
     iconSet.push(set);
   } else {
+    let excludedOptionsObj: { [key: string]: string } = {};
+    if (hasExclusion) {
+      excludedOptionsObj = excludedOptions.reduce(
+        (prev: { [key: string]: string }, cur) => {
+          prev[cur] = cur;
+          return prev;
+        },
+        {}
+      );
+    }
     for (let i = 0; i < options.length; i++) {
       const opt = options[i];
       if (Array.isArray(opt)) {
-        const set = createToolSet(opt, icons, defaultFontFamily);
+        let optFiltered = opt;
+        if (hasExclusion) {
+          optFiltered = opt.filter(
+            (it) => typeof it === 'string' && !excludedOptionsObj[it]
+          );
+        }
+        const set = createToolSet(optFiltered, icons, defaultFontFamily);
         iconSet.push(set);
-      } else
-        console.log(opt, 'is not an array, you should pass it as an array');
+      } else {
+        if (__DEV__)
+          console.log(opt, 'is not an array, you should pass it as an array');
+      }
     }
   }
 
