@@ -1,7 +1,6 @@
 {
   "name": "react-native-cn-quill",
   "version": "0.7.18",
-  "private": true,
   "license": "MIT",
   "description": "react-native quill richtext editor",
   "main": "lib/commonjs/index",
